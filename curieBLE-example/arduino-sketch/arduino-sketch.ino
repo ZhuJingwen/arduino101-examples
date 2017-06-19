@@ -22,7 +22,7 @@ void setup() {
   BLE.begin();
 
   // set advertised local name and service UUID:
-  BLE.setLocalName("CurieJ");
+  BLE.setLocalName("CurieBLE");
   BLE.setAdvertisedService(customService);
 
   // add the characteristic to the service
