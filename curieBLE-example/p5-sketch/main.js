@@ -1,4 +1,9 @@
 const serviceUuid = "19b10000-e8f2-537e-4f6c-d104768a1216"; // lowercase hex characters e.g. '00001234-0000-1000-8000-00805f9b34fb'
+const characteristicsUUID = {
+  x:"4227f3b1-d6a2-4fb2-a916-3bee580a9c84",
+  y:"5b974f46-6f48-43ee-9a55-4fb009867603",
+  z:"09a64f10-32b3-497a-93c2-c914f46eba22"
+};
 
 var characteristicX;
 var characteristicY;
@@ -31,9 +36,16 @@ function connect() {
     })
     .then(characteristics => {
       console.log('Got Characteristics');
-      characteristicX = characteristics[0];
-      characteristicY = characteristics[1];
-      characteristicZ = characteristics[2];
+
+      for(var i = 0; i < characteristics.length;i++){
+        if(characteristics[i].uuid == characteristicsUUID.x){
+          characteristicX = characteristics[i];
+        }else if(characteristics[i].uuid == characteristicsUUID.y){
+          characteristicY = characteristics[i];
+        }else if(characteristics[i].uuid == characteristicsUUID.z){
+          characteristicZ = characteristics[i];
+        }
+      }
 
       characteristicX.startNotifications().then(_ => {
         log('> Notifications started');
